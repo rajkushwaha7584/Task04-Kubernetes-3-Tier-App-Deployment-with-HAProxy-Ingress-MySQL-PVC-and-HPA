@@ -19,7 +19,6 @@ In this task, the existing NGINX Ingress setup was replaced with HAProxy Ingress
 
 Browser → HAProxy Ingress Controller → Ingress Rules → Frontend/Backend Service → Pods → MySQL Service → MySQL Pod with PVC
 
-
 #-->
 Completed Task04 Kubernetes 3-tier application deployment with HAProxy Ingress.
 
