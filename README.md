@@ -1,27 +1,30 @@
-# Task04-3-Tier-Application-Deployment-on-Kubernetes-Kind-with-Ingress-MySQL-PVC-and-HPA
-# Task04: Kubernetes 3-Tier Application Deployment
+#Add HAProxy Ingress setup for Task04 Kubernetes deployment
 
-This project is a Kubernetes-based deployment of a 3-tier application using Kind cluster.
+## HAProxy Ingress Setup
 
-## Project Components
+In this task, the existing NGINX Ingress setup was replaced with HAProxy Ingress Controller.
 
-- Frontend application running with Nginx
-- Backend API service
-- MySQL database
-- Kubernetes Ingress for browser access
-- ClusterIP services for internal communication
-- StatefulSet and PVC for database persistence
-- HPA for backend auto-scaling
+### Changes Implemented
 
-## Architecture Flow
+- Updated `ingressClassName` from `nginx` to `haproxy`
+- Removed the old NGINX Ingress Controller
+- Installed HAProxy Ingress Controller using Helm
+- Updated Ingress routing rules
+- Verified application routing for:
+  - `/` → Frontend Service
+  - `/api` → Backend Service
+  - `/health` → Backend Service
 
-Browser → Ingress → Frontend Service → Frontend Pod → Backend Service → Backend Pod → DB Service → MySQL Pod → PVC
+### Final Traffic Flow
 
-## What I Learned
+Browser → HAProxy Ingress Controller → Ingress Rules → Frontend/Backend Service → Pods → MySQL Service → MySQL Pod with PVC
 
-- How to deploy frontend, backend, and database on Kubernetes
-- How services communicate internally using ClusterIP
-- How Ingress exposes the application to browser
-- How StatefulSet and PVC are used for database persistence
-- How HPA scales backend pods based on CPU usage
-# Task04-Kubernetes-3-Tier-App-Deployment-with-HAProxy-Ingress-MySQL-PVC-and-HPA
+
+#-->
+Completed Task04 Kubernetes 3-tier application deployment with HAProxy Ingress.
+
+In this project, I deployed a frontend, backend API, and MySQL database on a Kind Kubernetes cluster. I configured Kubernetes resources including Deployment, StatefulSet, Service, Secret, ConfigMap, PVC, Ingress, and HPA.
+
+I also replaced the NGINX Ingress Controller with HAProxy Ingress Controller using Helm. The final routing flow sends `/` traffic to the frontend service, while `/api` and `/health` traffic are routed directly to the backend service.
+
+This task helped me understand Kubernetes networking, Ingress controllers, service-to-pod communication, persistent storage, and autoscaling.
